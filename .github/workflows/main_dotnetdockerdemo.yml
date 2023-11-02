@@ -30,7 +30,7 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: dotnetdemoregistry.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_05d92675ba1847e1ac93b2e39fde0c9b }}/dotnetdemoimage:${{ github.sha }}
+        tags: dotnetdemoregistry.azurecr.io/dotnetdemoimage:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -47,5 +47,5 @@ jobs:
       with:
         app-name: 'dotnetdockerdemo'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_913ef7ce9aaa4b26a29a193362a4505a }}
-        images: 'dotnetdemoregistry.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_05d92675ba1847e1ac93b2e39fde0c9b }}/dotnetdemoimage:${{ github.sha }}'
+        publish-profile: ${{ secrets.DEMO_PUBLISH_KEY }}
+        images: 'dotnetdemoregistry.azurecr.io/dotnetdemoimage:${{ github.sha }}'
