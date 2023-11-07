@@ -30,7 +30,7 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: dotnetsampleapp.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_82b68c0c3bce44f48cc729905fbf2ddf }}/dotnetsampleimage:${{ github.sha }}
+        tags: dotnetsampleapp.azurecr.io/dotnetsampleimage:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -48,4 +48,4 @@ jobs:
         app-name: 'dotnetsampleapp'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_d064ff0775d24314a060093eb9354fe1 }}
-        images: 'dotnetsampleapp.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_82b68c0c3bce44f48cc729905fbf2ddf }}/dotnetsampleimage:${{ github.sha }}'
+        images: 'dotnetsampleapp.azurecr.io/dotnetsampleimage:${{ github.sha }}'
