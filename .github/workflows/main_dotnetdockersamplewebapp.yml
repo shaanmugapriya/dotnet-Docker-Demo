@@ -23,14 +23,14 @@ jobs:
       uses: docker/login-action@v2
       with:
         registry: https://dotnetdockersampleregistry.azurecr.io/
-        username: ${{ secrets.AzureAppService_ContainerUsername_68640b136b2b4731b54c4244244055b8 }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_8f44244ca1a14604816e4989afd3d2fd }}
+        username: ${{ secrets.DEMO_DOCKER_USERNAME }}
+        password: ${{ secrets.DEMO_DOCKER_PASSWORD }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: dotnetdockersampleregistry.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_68640b136b2b4731b54c4244244055b8 }}/dotnetdockersample:${{ github.sha }}
+        tags: dotnetdockersampleregistry.azurecr.io/dotnetdockersample:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -48,4 +48,4 @@ jobs:
         app-name: 'dotnetdockersamplewebapp'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_bcb7aade389544a3bdd4e2b9a0e351e1 }}
-        images: 'dotnetdockersampleregistry.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_68640b136b2b4731b54c4244244055b8 }}/dotnetdockersample:${{ github.sha }}'
+        images: 'dotnetdockersampleregistry.azurecr.io/dotnetdockersample:${{ github.sha }}'
